@@ -1,0 +1,123 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>多彩泡泡悬浮碰撞动画代码</title>
+	<style type="text/css">
+		html,
+		body {
+			width: 900px;
+			height: 600px;
+		}
+
+		#advertisement {
+			width: 900px;
+			height: 200px;
+			position: absolute;
+			top: 0px;
+		}
+
+		#trashbox {
+			width: 80px;
+			height: 0;
+			position: absolute;
+			top: 200px;
+			left: 550px;
+			opacity: 0.7;
+			border-top: 120px solid blue;
+			border-right: 37px solid transparent;
+			border-left: 37px solid transparent;
+		}
+
+		#user {
+			width: 900px;
+			height: 300px;
+			position: absolute;
+			top: 320px;
+		}
+
+		.ball {
+			background: black;
+			border-radius: 50%;
+			position: absolute;
+			height: 40px;
+			width: 40px;
+			top: 450px;
+			left: 600px;
+			text-align: center;
+		}
+
+		#ball1 {
+			background: #fb9153;
+			text-align: center;
+			size: 100px;
+		}
+
+		#ball2 {
+			background: #55967E;
+		}
+
+		#ball3 {
+			background: #4D606E;
+		}
+
+		#ball4 {
+			background: #cc0033;
+		}
+
+	</style>
+</head>
+
+<body>
+	<div id="advertisement">
+		<div class="ball" id="ball1" style="display: none;"></div>
+		<div class="ball" id="ball2" style="display: none;"></div>
+		<div class="ball" id="ball3" style="display: none;"></div>
+		<div class="ball" id="ball4" style="display: none;"></div>
+	</div>
+	<div id="trashbox"></div>
+	<div id="user"></div>
+
+	<script src="js/collision.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+    
+    <script type="text/javascript">
+		function rand(m, n) { return m + parseInt((n - m) * Math.random()); }
+		function Getball() {
+			var says = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
+			// var says = ['1','2'];
+			return says;
+		};
+		var says = new Getball();
+		var saysLength = says.length;
+		var oC = document.getElementById('user');
+		var mxwidth = oC.offsetWidth;
+		var mxheight = oC.offsetHeight;
+		var oB = new BallBox('user');
+		oB.ballRun();
+		for (var i = 0; i < saysLength; i++) {
+			var b = 30;
+			var x = rand(b, mxwidth - b);
+			var y = rand(b, mxheight - b);
+			var ii = this.i
+			var ball = new Ball({
+				'b': b,
+				'x': x,
+				'y': y,
+				't': says[ii],
+				'sx': rand(2, 4),
+				'sy': rand(2, 4),
+				'c': 'url(img/paopao' + ((ii % 5) + 1) + '.png)',
+				'opa': rand(60, 100) / 100,
+				'callBack': function (n) {
+					this.setOpa(rand(60, 100) / 100);
+				}
+			});
+			oB.addBall(ball);
+		}
+	</script>
+
+</body>
+
+</html>
